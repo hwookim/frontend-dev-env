@@ -16,6 +16,13 @@ module.exports = {
         use: [
           path.resolve('./webpack-loader.js'),
         ], // 사용할 로더 목록
+      },
+      {
+        test: /\.css$/, // 로더 적용 대상
+        use: [
+          "style-loader",
+          'css-loader',
+        ], // 적용되는 순서는 맨 뒤에서부터 앞으로 (css -> style)
       }
     ]
   }
