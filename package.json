@@ -1,0 +1,11 @@
+{
+  "name": "frontend-dev-env",
+  "version": "1.0.0",
+  "description": "프론트엔드 개발환경의 이해 실습",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC"
+}
