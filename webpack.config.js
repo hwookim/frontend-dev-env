@@ -1,5 +1,6 @@
 const path = require("path");
 const WebpackPlugin = require("./webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: "development", // 실행 모드, production, development, none
@@ -29,7 +30,7 @@ module.exports = {
         test: /\.(png|jpg|gif|svg|jpeg)$/,
         loader: "url-loader",
         options: {
-          publicPath: "./dist/", // 파일 호출하는 쪽에 파일 위치를 알림
+          // publicPath: "./dist/", // 파일 호출하는 쪽에 파일 위치를 알림 -> HtmlWebpackPlugin을 통해 스크립트 자동 생성
           name: "[name].[ext]?[hash]", // 이미지 명을 해쉬값을 포함해서 찾도록 함. 해쉬값은 캐쉬 무력화를 할 수 있게 한다.
           limit: 20000, // 20kb 이하의 파일만 처리, 그 이상은 file-loader를 통해 처리함 => file-loader도 설치되어 있어야 함!
         },
@@ -38,6 +39,17 @@ module.exports = {
   },
   plugins: [
     new WebpackPlugin(),
+    new HtmlWebpackPlugin({ // HML 파일 후처리 플러그인
+      template: "./index.html", // 템플릿 경로
+      templateParameters: { // 템플릿에 주입할 파라매터 변수 지정, <%= %> 안에 있는 변수를 읽는다.
+        env: process.env.NODE_ENV === "development" ? "(개발용)" : "", // NODE_ENV=development webpack 를 통해 지정 가능
+      },
+      minify: process.env.NODE_ENV === 'production' ? { // 빌드된 html 파일의 경량화
+        collapseWhitespace: true, // 빈칸 제거
+        removeComments: true, // 주석 제거
+      } : false,
+      hash: true, // 정적 파일을 불러올때 쿼리문자열에 웹팩 해쉬값을 추가한다
+    }),
   ],
 }
 
