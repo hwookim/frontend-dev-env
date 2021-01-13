@@ -1,4 +1,5 @@
 const path = require("path");
+const WebpackPlugin = require("./webpack-plugin");
 
 module.exports = {
   mode: "development", // 실행 모드, production, development, none
@@ -35,5 +36,8 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new WebpackPlugin(),
+  ],
 }
 
