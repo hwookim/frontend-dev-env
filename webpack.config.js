@@ -2,11 +2,12 @@ const path = require("path");
 const WebpackPlugin = require("./webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development", // 실행 모드, production, development, none
   entry: {
-    main: "./src/index.js", // 최상위 스크립트 파일
+    main: "./src/index.js", // 최상위 스크립트 파일, key => [name]
   },
   output: {
     path: path.resolve("./dist"), // 빌드 파일 생성 위치
@@ -23,8 +24,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          "style-loader",
-          'css-loader',
+          process.env.NODE_ENV === "production"
+            ? MiniCssExtractPlugin.loader // 프로덕션 환경 => MiniCssExtractPlugin은 기본 로더 사용해야함
+            : "style-loader", // 개발 환경
+          "css-loader",
         ], // 적용되는 순서는 맨 뒤에서부터 앞으로 (css -> style)
       },
       {
@@ -52,6 +55,10 @@ module.exports = {
       hash: true, // 정적 파일을 불러올때 쿼리문자열에 웹팩 해쉬값을 추가한다
     }),
     new CleanWebpackPlugin(), // 이전 빌드 파일 제거 후 새로 빌드
+    ...(process.env.NODE_ENV === "production"
+      ? [new MiniCssExtractPlugin({filename: "[name].css"})] // style을 js에 귀속시키지 않고 별도의 css 파일로 분리
+      // 하나의 큰 파일을 다운받는 것 보다 여러 파일을 동시적으로 받는 것이 효율적임
+      :[]), // 개발 환경에서는 굳이 안해도 되나..?
   ],
 }
 
