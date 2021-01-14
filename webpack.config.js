@@ -1,6 +1,7 @@
 const path = require("path");
 const WebpackPlugin = require("./webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   mode: "development", // 실행 모드, production, development, none
@@ -50,6 +51,7 @@ module.exports = {
       } : false,
       hash: true, // 정적 파일을 불러올때 쿼리문자열에 웹팩 해쉬값을 추가한다
     }),
+    new CleanWebpackPlugin(), // 이전 빌드 파일 제거 후 새로 빌드
   ],
 }
 
