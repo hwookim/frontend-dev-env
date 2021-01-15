@@ -22,6 +22,11 @@ module.exports = {
         ], // 사용할 로더 목록
       },
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+      },
+      {
         test: /\.css$/,
         use: [
           process.env.NODE_ENV === "production"
