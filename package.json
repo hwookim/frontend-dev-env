@@ -13,6 +13,7 @@
   "devDependencies": {
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-arrow-functions": "^7.12.1",
     "@babel/plugin-transform-block-scoping": "^7.12.12",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.1",
