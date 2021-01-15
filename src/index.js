@@ -1,8 +1,12 @@
 import "./index.css";
 import img from "./img/times-circle.png";
-import big_img from "./img/big.jpeg"
+import big_img from "./img/big.jpeg";
 
-console.log("hello world");
+const time = () => {
+  return new Date().toLocaleDateString();
+}
+
+console.log(`It's ${time()}`);
 
 document.addEventListener("DOMContentLoaded", () => {
   document.body.innerHTML = `
