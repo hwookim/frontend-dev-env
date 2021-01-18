@@ -3,10 +3,11 @@ babel은 브라우저마다 js 환경이 다른 문제를 해결하기 위해 �
  */
 
 module.exports = {
-  // plugins: [
+  plugins: [
   //   "@babel/plugin-transform-block-scoping", // const, let => var
   //   "@babel/plugin-transform-arrow-functions", // 화살표 함수 변경 '() =>' => 'function()'
-  // ],
+  //   "@babel/plugin-transform-strict-mode", // use strict => 엄격한 문법 확인
+  ],
   presets: [
     "@babel/preset-env", // 프리셋을 통한 바벨 플러그인 통합 관리
   ]
