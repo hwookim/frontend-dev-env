@@ -1,4 +1,4 @@
-import "./index.css";
+import "./index.scss";
 import img from "./img/times-circle.png";
 import big_img from "./img/big.jpeg";
 

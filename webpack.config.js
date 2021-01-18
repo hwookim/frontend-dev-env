@@ -27,12 +27,13 @@ module.exports = {
         loader: "babel-loader",
       },
       {
-        test: /\.css$/,
+        test: /\.(c|sc|sa)ss$/, // scss, sass 대응
         use: [
           process.env.NODE_ENV === "production"
             ? MiniCssExtractPlugin.loader // 프로덕션 환경 => MiniCssExtractPlugin은 기본 로더 사용해야함
             : "style-loader", // 개발 환경
           "css-loader",
+          "sass-loader",
         ], // 적용되는 순서는 맨 뒤에서부터 앞으로 (css -> style)
       },
       {
