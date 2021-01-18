@@ -4,7 +4,7 @@ import big_img from "./img/big.jpeg";
 
 const time = () => {
   return new Date().toLocaleDateString();
-}
+};
 
 console.log(`It's ${time()}`);
 
@@ -13,6 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
     <img src="${img}" />
     <img src="${big_img}" />
   `;
-})
+});
 
 new Promise();
