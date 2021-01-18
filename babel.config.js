@@ -6,9 +6,16 @@ module.exports = {
   plugins: [
   //   "@babel/plugin-transform-block-scoping", // const, let => var
   //   "@babel/plugin-transform-arrow-functions", // 화살표 함수 변경 '() =>' => 'function()'
-  //   "@babel/plugin-transform-strict-mode", // use strict => 엄격한 문법 확인
+  //   "@babel/plugin-transform-strict-mode", // use strict => 엄격한 문 확인
   ],
   presets: [
-    "@babel/preset-env", // 프리셋을 통한 바벨 플러그인 통합 관리
+    ["@babel/preset-env", // 프리셋을 통한 바벨 플러그인 통합 관리
+      {
+        targets: { // 호환 가능한 브라우저 타입 지정
+          chrome: "79",
+          ie: "11",
+        },
+      }
+    ]
   ]
 }
