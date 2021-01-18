@@ -14,3 +14,5 @@ document.addEventListener("DOMContentLoaded", () => {
     <img src="${big_img}" />
   `;
 })
+
+new Promise();

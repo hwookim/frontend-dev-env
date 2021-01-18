@@ -15,7 +15,12 @@ module.exports = {
           chrome: "79",
           ie: "11",
         },
-      }
-    ]
-  ]
+        useBuiltIns: "usage", // promise와 같은 IE에서 사용불가한 함수를 core-js의 폴리필을 통해 사용 가능하도록 함
+        // 폴리필 - 브라우저에서 지원하지 않는 기능을 다른 함수를 통해 구현해둔 코드 조각
+        corejs: {
+          version: 2, // core-js 버전 지정
+        },
+      },
+    ],
+  ],
 }
