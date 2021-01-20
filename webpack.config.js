@@ -13,6 +13,10 @@ module.exports = {
     path: path.resolve("./dist"), // 빌드 파일 생성 위치
     filename: "[name].js", // 빌드 파일명
   },
+  devServer: {
+    overlay: true,
+    stats: "errors-only", // webpack-dev-server로 실행 중 오류 발생 시 오버레이를 통해 오류 고지
+  },
   module: {
     rules: [
       {
