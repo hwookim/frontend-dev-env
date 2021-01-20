@@ -16,6 +16,11 @@ module.exports = {
   devServer: {
     overlay: true,
     stats: "errors-only", // webpack-dev-server로 실행 중 오류 발생 시 오버레이를 통해 오류 고지
+    hot: true, // 소스코드 변경 감지로 인한 리로드 시 전체 파일을 다시 불러오지 않고 변경 부분만 적용 => 개발환경 내 기존 데이터 초기화 안됨
+    /*
+     HMR(핫 모듈 리플레이스먼트) 경우에는 지원하는 별도의 로더가 있기 때문에 확인해야한다.
+     https://webpack.js.org/guides/hot-module-replacement/#other-code-and-frameworks
+    */
   },
   module: {
     rules: [
