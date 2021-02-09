@@ -14,6 +14,15 @@ module.exports = {
     filename: "[name].js", // 빌드 파일명
   },
   devServer: {
+    before: (app) => {
+      app.get("/api", (req, res) => {
+        res.json([
+          { id: 1, name: "A" },
+          { id: 2, name: "B" },
+        ]);
+      });
+    }, // dev-server 이용 시 "/api"로 들어오는 요청을 받으면 함수를 실행
+    open: true,
     overlay: true,
     stats: "errors-only", // webpack-dev-server로 실행 중 오류 발생 시 오버레이를 통해 오류 고지
     hot: true, // 소스코드 변경 감지로 인한 리로드 시 전체 파일을 다시 불러오지 않고 변경 부분만 적용 => 개발환경 내 기존 데이터 초기화 안됨
@@ -24,10 +33,10 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.js$/, // 로더 적용 대상
-        use: [path.resolve("./webpack-loader.js")], // 사용할 로더 목록
-      },
+      // {
+      //   test: /\.js$/, // 로더 적용 대상
+      //   use: [path.resolve("./webpack-loader.js")], // 사용할 로더 목록
+      // },
       {
         test: /\.js$/,
         exclude: /node_modules/,
