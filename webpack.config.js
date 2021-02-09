@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const apiMocker = require("connect-api-mocker");
+
 module.exports = {
   mode: "development", // 실행 모드, production, development, none
   entry: {
@@ -15,12 +17,7 @@ module.exports = {
   },
   devServer: {
     before: (app) => {
-      app.get("/api", (req, res) => {
-        res.json([
-          { id: 1, name: "A" },
-          { id: 2, name: "B" },
-        ]);
-      });
+      app.use(apiMocker("/api", "mocks/api")); // api 요청을 mocks/api 폴더로 리다이렉트
     }, // dev-server 이용 시 "/api"로 들어오는 요청을 받으면 함수를 실행
     open: true,
     overlay: true,
