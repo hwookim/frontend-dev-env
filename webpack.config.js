@@ -42,7 +42,7 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
+      // { 커스텀 로더
       //   test: /\.js$/, // 로더 적용 대상
       //   use: [path.resolve("./webpack-loader.js")], // 사용할 로더 목록
       // },
