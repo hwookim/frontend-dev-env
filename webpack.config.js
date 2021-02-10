@@ -6,8 +6,20 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const apiMocker = require("connect-api-mocker");
 
+const mode = process.env.NODE_ENV || "development"; // if (!process.env.NODE_ENV) return development
+/*
+ production일 경우 몇가지 최적화 플러그인을 자동으로 적용함
+ FlagDependencyUsagePlugin
+ FlagIncludedChunksPlugin
+ ModuleConcatenationPlugin
+ NoEmitOnErrorsPlugin
+ OccurrenceOrderPlugin
+ SideEffectsFlagPlugin
+ TerserPlugin
+*/
+
 module.exports = {
-  mode: "development", // 실행 모드, production, development, none
+  mode, // 실행 모드, production, development, none
   entry: {
     main: "./src/index.js", // 최상위 스크립트 파일, key => [name]
   },
