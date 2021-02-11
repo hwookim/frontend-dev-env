@@ -1,6 +1,6 @@
-class WebpackPlugin {
+class WebpackBannerPlugin {
   apply(compiler) {
-    compiler.hooks.done.tap("My Plugin", (stats) => {
+    compiler.hooks.done.tap("My Plugin", () => {
       console.log("MyPlugin: done");
     });
 
@@ -24,4 +24,4 @@ class WebpackPlugin {
   }
 }
 
-module.exports = WebpackPlugin;
+module.exports = WebpackBannerPlugin;

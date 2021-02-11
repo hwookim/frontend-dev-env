@@ -1,5 +1,5 @@
 const path = require("path");
-const WebpackPlugin = require("./webpack-plugin");
+// const WebpackBannerPlugin = require("./webpack-banner-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -73,7 +73,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new WebpackPlugin(),
+    // new WebpackBannerPlugin(),
     new HtmlWebpackPlugin({
       // HML 파일 후처리 플러그인
       template: "./index.html", // 템플릿 경로
