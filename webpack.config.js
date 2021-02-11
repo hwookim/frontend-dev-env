@@ -3,10 +3,11 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const apiMocker = require("connect-api-mocker");
 
-const mode = process.env.NODE_ENV || "development"; // if (!process.env.NODE_ENV) return development
+const mode = process.env.NODE_ENV || "development";
 /*
  production일 경우 몇가지 최적화 플러그인을 자동으로 적용함
  FlagDependencyUsagePlugin
@@ -97,4 +98,13 @@ module.exports = {
       : // 하나의 큰 파일을 다운받는 것 보다 여러 파일을 동시적으로 받는 것이 효율적임
         []), // 개발 환경에서는 굳이 안해도 되나..?
   ],
+  optimization: {
+    // 최적화
+    minimizer:
+      mode === "production"
+        ? [
+            new OptimizeCSSAssetsPlugin(), // css파일 최대 압축
+          ]
+        : [],
+  },
 };
