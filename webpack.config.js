@@ -8,6 +8,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const apiMocker = require("connect-api-mocker");
 
 const mode = process.env.NODE_ENV || "development";
+const isProduction = mode === "production";
 /*
  production일 경우 몇가지 최적화 플러그인을 자동으로 적용함
  FlagDependencyUsagePlugin
@@ -55,7 +56,7 @@ module.exports = {
       {
         test: /\.(c|sc|sa)ss$/, // scss, sass 대응
         use: [
-          process.env.NODE_ENV === "production"
+          isProduction
             ? MiniCssExtractPlugin.loader // 프로덕션 환경 => MiniCssExtractPlugin은 기본 로더 사용해야함
             : "style-loader", // 개발 환경
           "css-loader",
@@ -82,29 +83,27 @@ module.exports = {
         // 템플릿에 주입할 파라매터 변수 지정, <%= %> 안에 있는 변수를 읽는다.
         env: process.env.NODE_ENV === "development" ? "(개발용)" : "", // NODE_ENV=development webpack 를 통해 지정 가능
       },
-      minify:
-        process.env.NODE_ENV === "production"
-          ? {
-              // 빌드된 html 파일의 경량화
-              collapseWhitespace: true, // 빈칸 제거
-              removeComments: true, // 주석 제거
-            }
-          : false,
+      minify: isProduction
+        ? {
+            // 빌드된 html 파일의 경량화
+            collapseWhitespace: true, // 빈칸 제거
+            removeComments: true, // 주석 제거
+          }
+        : false,
       hash: true, // 정적 파일을 불러올때 쿼리문자열에 웹팩 해쉬값을 추가한다
     }),
     new CleanWebpackPlugin(), // 이전 빌드 파일 제거 후 새로 빌드
-    ...(process.env.NODE_ENV === "production"
+    ...(isProduction
       ? [new MiniCssExtractPlugin({ filename: "[name].css" })] // style을 js에 귀속시키지 않고 별도의 css 파일로 분리
       : // 하나의 큰 파일을 다운받는 것 보다 여러 파일을 동시적으로 받는 것이 효율적임
         []), // 개발 환경에서는 굳이 안해도 되나..?
   ],
   optimization: {
     // 최적화
-    minimizer:
-      mode === "production"
-        ? [
-            new OptimizeCSSAssetsPlugin(), // css파일 최대 압축
-          ]
-        : [],
+    minimizer: isProduction
+      ? [
+          new OptimizeCSSAssetsPlugin(), // css파일 최대 압축
+        ]
+      : [],
   },
 };
