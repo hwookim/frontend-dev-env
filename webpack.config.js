@@ -30,6 +30,7 @@ module.exports = {
     publicPath: "/", // nested path를 가능하도록 함
   },
   devServer: {
+    contentBase: path.join(__dirname, "dist"), // 정적파일 제공 위치
     before: (app) => {
       app.use(apiMocker("/api", "mocks/api")); // api 요청을 mocks/api 폴더로 리다이렉트
     }, // dev-server 이용 시 "/api"로 들어오는 요청을 받으면 함수를 실행
