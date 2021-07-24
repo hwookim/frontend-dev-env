@@ -27,6 +27,7 @@ module.exports = {
   output: {
     path: path.resolve("./dist"), // 빌드 파일 생성 위치
     filename: "[name].js", // 빌드 파일명
+    publicPath: "/", // nested path를 가능하도록 함
   },
   devServer: {
     before: (app) => {
@@ -40,6 +41,7 @@ module.exports = {
      HMR(핫 모듈 리플레이스먼트) 경우에는 지원하는 별도의 로더가 있기 때문에 확인해야한다.
      https://webpack.js.org/guides/hot-module-replacement/#other-code-and-frameworks
     */
+    historyApiFallback: true, // 404 시 index.html로 보냄
   },
   module: {
     rules: [
